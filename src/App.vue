@@ -1,17 +1,27 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
+<script>
+  import logoApp from './assets/images/logo.svg'
+  import BillSplitterApp from './components/BillSplitter-app.vue';
+  export default {
+    components: {
+      BillSplitterApp
+    },
+    data(){
+      return{
+        logo: logoApp
+      }
+    }
+    
+   
+  };
 </script>
 
 <template>
   <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+    <img :src="logo" alt="" class="logo">
+    
   </div>
-  <HelloWorld msg="Vite + Vue" />
+  <BillSplitterApp />
+  
 </template>
 
 <style scoped>
@@ -22,9 +32,7 @@ import HelloWorld from './components/HelloWorld.vue'
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+  filter: drop-shadow(0 0 2em #029553aa);
 }
 </style>
+ 
