@@ -23,12 +23,12 @@
             <div class="output-section">
                 <div class="output-group">
                     <label>Tip Amount / person</label>
-                    <div class="output-value">{{ tipAmountPerPerson }}
+                    <div class="output-value">{{ formattedTipAmountPerPerson }}
                     </div>
                 </div>
                 <div class="output-group">
                     <label>Total / person</label>
-                    <div class="output-value">{{ totalPerPerson }}
+                    <div class="output-value">{{ formattedTotalPerPerson }}
                     </div>
                 </div>
                 <button @click="reset">RESET</button>
@@ -45,38 +45,73 @@ export default{
             tipOptions: [5, 10, 15, 25, 50],
             selectedTip: null,
             customTipValue: null,
-            people: null,
+            people: 1
         };
     },
     computed: {
         tipAmountPerPerson() {
-            let tipAmount;
-            if (this.customTipValue) {
-                tipAmount = (this.bill * this.customTipValue) / 100; 
+            let tipAmount = 0;
+            let billAmount = parseFloat(this.bill) || 0.00;
+            let peopleCount = parseFloat(this.people) || 1;
+
+            let tipPercentage;
+            if (this.customTipValue > 0) {
+                 tipPercentage = this.customTipValue;    
             } else  {
-                tipAmount = (this.bill * this.selectedTip) / 100; 
+                tipPercentage = this.selectedTip;
             }
-
-            return (tipAmount / this.people).toFixed(2);
-},
-        
-        totalPerPerson() {
-            let tipAmount;
-            let totalTipAmount ; 
-           if (this.customTipValue) { 
-                tipAmount = (this.bill * this.customTipValue) / 100;
-
+            if (!isNaN(billAmount) && !isNaN(peopleCount)){
+              tipAmount = (billAmount * tipPercentage) / 100;
+              return (tipAmount / peopleCount).toFixed(2);
             } else {
-                tipAmount = (this.bill * this.selectedTip) / 100;
+                return "0.00";
+            }
+        },
+        totalPerPerson() {
+            let tipAmount = 0;
+            let billAmount = parseFloat(this.bill) || 0.00;
+            let peopleCount = parseFloat(this.people) || 1;
+            
+            let tipPercentage;
+            let totalTipAmount; 
+           if (this.customTipValue > 0) { 
+                tipPercentage = this.customTipValue;
+            } else {
+                tipPercentage = this.selectedTip;
             } 
-            totalTipAmount = this.bill + tipAmount; 
-            return (totalTipAmount / this.people).toFixed(2);
-        }
-       
+            if(!isNaN(billAmount) && !isNaN(peopleCount)){
+               tipAmount = (billAmount * tipPercentage) / 100;
+               totalTipAmount = billAmount + tipAmount;
+               return (totalTipAmount / peopleCount).toFixed(2);
+            } else {
+              return "0.00";
+            }
+        },
+        formattedTipAmountPerPerson(){
+            // Ternary operator
+            // return isNaN(this.tipAmountPerPerson) ? "0.00" : this.tipAmountPerPerson;
+
+            // Same as above code 
+            if(isNaN(this.tipAmountPerPerson)){
+               return "0.00";
+            } else {
+                return this.tipAmountPerPerson;
+            }
+        },
+        formattedTotalPerPerson(){
+            // Ternary operator
+            // return isNaN(this.totalPerPerson) ? "0.00" : this.totalPerPerson;
+            if(isNaN(this.totalPerPerson)){
+                return "0.00";
+            } else {
+                return this.totalPerPerson;
+            }
+        },
     },
     methods: {
         selectTip(tip) {
             this.selectedTip = tip;
+            this.customTipValue = null // Clear customTipValue when a standard tip is selected
         },
         reset(){
             this.bill = null;
