@@ -4,19 +4,18 @@
             <div class="input-section">
                 <div class="input-group">
                     <label for="bill">Bill</label>
-                    <input type="number" id="bill" v-model="bill" placeholder="0.00">
+                    <input id="bill" v-model.number="bill" placeholder="0.00">
                 </div>
                 <div class="input-group">
                     <label>Select Tip %</label>
                     <div class="tip-options">
-                        <button  v-for="tip in tipOptions" :key="tip" 
-                        @click="selectTip(tip)">{{ tip }}%</button>
+                        <button v-for="tip in tipOptions" :key="tip" @click="selectTip(tip)">{{ tip }}%</button>
                         <!-- <button @click="customTip = true">Custom</button> -->
-                        <input type="number"  v-model="customTipValue" placeholder="Custom" />
+                        <input id="customTipValue" v-model.number="customTipValue" placeholder="Custom" />
                     </div>
                     <div class="input-group">
                         <label for="people" id="people">Number of People</label>
-                        <input type="number" id="people" v-model="people">
+                        <input id="people" v-model="people">
                     </div>
                 </div>
             </div>
@@ -38,14 +37,14 @@
 </template>
 
 <script>
-export default{
-    data(){
+export default {
+    data() {
         return {
-            bill: null,
+            bill: 142.55,
             tipOptions: [5, 10, 15, 25, 50],
-            selectedTip: null,
+            selectedTip: 15,
             customTipValue: null,
-            people: 1
+            people: 5
         };
     },
     computed: {
@@ -56,13 +55,13 @@ export default{
 
             let tipPercentage;
             if (this.customTipValue > 0) {
-                 tipPercentage = this.customTipValue;    
-            } else  {
+                tipPercentage = this.customTipValue;
+            } else {
                 tipPercentage = this.selectedTip;
             }
-            if (!isNaN(billAmount) && !isNaN(peopleCount)){
-              tipAmount = (billAmount * tipPercentage) / 100;
-              return (tipAmount / peopleCount).toFixed(2);
+            if (!isNaN(billAmount) && !isNaN(peopleCount)) {
+                tipAmount = (billAmount * tipPercentage) / 100;
+                return (tipAmount / peopleCount).toFixed(2);
             } else {
                 return "0.00";
             }
@@ -71,37 +70,37 @@ export default{
             let tipAmount = 0;
             let billAmount = parseFloat(this.bill) || 0.00;
             let peopleCount = parseFloat(this.people) || 1;
-            
+
             let tipPercentage;
-            let totalTipAmount; 
-           if (this.customTipValue > 0) { 
+            let totalTipAmount;
+            if (this.customTipValue > 0) {
                 tipPercentage = this.customTipValue;
             } else {
                 tipPercentage = this.selectedTip;
-            } 
-            if(!isNaN(billAmount) && !isNaN(peopleCount)){
-               tipAmount = (billAmount * tipPercentage) / 100;
-               totalTipAmount = billAmount + tipAmount;
-               return (totalTipAmount / peopleCount).toFixed(2);
+            }
+            if (!isNaN(billAmount) && !isNaN(peopleCount)) {
+                tipAmount = (billAmount * tipPercentage) / 100;
+                totalTipAmount = billAmount + tipAmount;
+                return (totalTipAmount / peopleCount).toFixed(2);
             } else {
-              return "0.00";
+                return "0.00";
             }
         },
-        formattedTipAmountPerPerson(){
+        formattedTipAmountPerPerson() {
             // Ternary operator
             // return isNaN(this.tipAmountPerPerson) ? "0.00" : this.tipAmountPerPerson;
 
             // Same as above code 
-            if(isNaN(this.tipAmountPerPerson)){
-               return "0.00";
+            if (isNaN(this.tipAmountPerPerson)) {
+                return "0.00";
             } else {
                 return this.tipAmountPerPerson;
             }
         },
-        formattedTotalPerPerson(){
+        formattedTotalPerPerson() {
             // Ternary operator
             // return isNaN(this.totalPerPerson) ? "0.00" : this.totalPerPerson;
-            if(isNaN(this.totalPerPerson)){
+            if (isNaN(this.totalPerPerson)) {
                 return "0.00";
             } else {
                 return this.totalPerPerson;
@@ -111,9 +110,9 @@ export default{
     methods: {
         selectTip(tip) {
             this.selectedTip = tip;
-            this.customTipValue = null // Clear customTipValue when a standard tip is selected
+            this.customTipValue = null; // Clear customTipValue when a standard tip is selected
         },
-        reset(){
+        reset() {
             this.bill = null;
             this.selectedTip = null;
             this.customTipValue = null;
@@ -122,3 +121,14 @@ export default{
     }
 }
 </script>
+
+<style scoped>
+.splitter {
+    background-color: var(--white);
+    border-radius: 15px;
+}
+
+label {
+    color: var(--very-dark-cyan);
+}
+</style>

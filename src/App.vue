@@ -16,12 +16,14 @@
 </script>
 
 <template>
-  <div>
-    <img :src="logo" alt="" class="logo">
+    <img :src="logo" alt="billSplitterlogo.svg" class="logo">
     
+    <BillSplitterApp />
+
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    Coded by <a href="#">Cornelio</a>.
   </div>
-  <BillSplitterApp />
-  
 </template>
 
 <style scoped>
@@ -32,7 +34,10 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #029553aa);
+  filter: drop-shadow(0 0 2em hsl(191, 94%, 14%));
 }
-</style>
+.attribution {
+  margin: 10px auto;
+  color: var(--very-dark-cyan)
+}</style>
  
