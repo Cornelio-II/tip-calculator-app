@@ -21,6 +21,10 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  list-style-type: none;
+  font-family: "Space Mono", monospace;
+  font-weight: 700;
+  cursor: pointer;
 }
 a {
   color: #646cff;
@@ -32,39 +36,57 @@ a:hover {
 
 body {
   min-height: 100vh;
-  font-family: "Space Mono", serif;
-  font-weight: 700;
   display: flex;
   background-color: var(--light-grayish-cyan); 
   align-items:center;
   text-align: center;
   justify-content: center;
   align-content: center;
-
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  font-size: 1rem;
-  font-weight: 700;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+  background-color: var(--very-dark-cyan);
+  color: var(--white);
+  border: none;
+  padding: 0.5rem  1rem;
+  border-radius: 5px;
+  font-size: 1.6rem;
 }
-button:hover {
-  border-color: #646cff;
+button.active {
+  background-color: var(--strong-cyan);
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+button:hover{
+  background-color: var(--light-grayish-cyan);
+  color: var(--very-dark-cyan);
 }
 
 label {
-    color: var(--dark-grayish-cyan);
-    display: block;
+  color: var(--dark-grayish-cyan);
+  display: flex;
+  margin-top: 1rem;
 }
-#app {
-
+input {
+  width: 100%;
+  height: 55px;
+  margin-top: 0.1rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: right;
+  border: none;
+  border-radius: 5px;
+  background-color:var(--very-light-graysh-cyan); 
+  color: var(--very-dark-cyan);
+  transition: all 300ms ease-in-out;
+  padding-right: 20px;
+}
+input:hover, 
+input:active,
+input:focus {
+  outline: 1px solid var(--white);
+  border-radius: 5px;
+  border-style: solid;
+  border-color: var(--strong-cyan);
+} 
+input::placeholder {
+  color: var(--dark-grayish-cyan);     
 }

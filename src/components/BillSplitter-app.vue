@@ -1,43 +1,29 @@
 <template>
-    <div class="bill splitter">
-        <div class="container">
-            <div class="input-section">
-                <div class="input-group">
-                    <label for="bill">Bill</label>
-                    <input id="bill" v-model.number="bill" placeholder="0.00">
+   <div class="container">
+        <div class="input-section">
+                <label for="bill">Bill</label>
+                <input id="bill" v-model.number="bill" placeholder="0.00">
+
+                <label>Select Tip %</label>
+                <div class="tip-options">
+                    <button v-for="tip in tipOptions" :key="tip" @click="selectTip(tip)"
+                        :class="{ active: selectedTip === tip }">{{ tip }}%
+                    </button>
+                    <input id="customTipValue" v-model.number="customTipValue"
+                        @input="onCustomTipInput" placeholder="Custom" />
                 </div>
-                <div class="input-group">
-                    <label>Select Tip %</label>
-                    <div class="tip-options">
-                        <button v-for="tip in tipOptions" :key="tip" @click="selectTip(tip)"
-                         :class="{ active: selectedTip === tip }">{{ tip
-                            }}%</button>
-                        <input 
-                        id="customTipValue" v-model.number="customTipValue" @input="onCustomTipInput"
-                        placeholder="Custom" />
-                    </div>
-                    <div class="input-group">
-                        <label for="people" id="people">Number of People</label>
-                        <input id="people" v-model.number="people">
-                    </div>
-                </div>
-            </div>
-            <div class="output-section">
-                <div class="output-group">
-                    <p>Tip Amount / person</p>
-                    <div class="output-value">{{ formattedTipAmountPerPerson }}
-                    </div>
-                </div>
-                <div class="output-group">
-                    <p>Total / person</p>
-                    <div class="output-value">{{ formattedTotalPerPerson }}
-                    </div>
-                </div>
-                <button class="reset-button" :disabled="!canReset" @click="reset">
-                    RESET
-                </button>
-            </div>
+                <label for="people" id="people">Number of People</label>
+                <input id="people" v-model.number="people" placeholder="0">
         </div>
+        <div class="output-section">
+            <p>Tip Amount / person</p>
+            <div class="output-value">${{ formattedTipAmountPerPerson }}</div>
+
+            <p>Total / person</p>
+            <div class="output-value">${{ formattedTotalPerPerson }}</div>
+
+            <button class="reset-button" :disabled="!canReset" @click="reset">RESET</button>
+            </div>
     </div>
 </template>
 
@@ -45,11 +31,11 @@
 export default {
     data() {
         return {
-            bill: 142.55,
+            bill: null,
             tipOptions: [5, 10, 15, 25, 50],
-            selectedTip: 15,
+            selectedTip: null,
             customTipValue: null,
-            people: 5,
+            people: null,
             isCustomTipActive: false,
         };
     },
@@ -138,7 +124,7 @@ export default {
             this.bill = null;
             this.selectedTip = null;
             this.customTipValue = null;
-            this.people = 1;
+            this.people = null;
             this.isCustomTipActive = false; 
         }
     }
@@ -150,19 +136,52 @@ export default {
     display: flex;
     background-color: var(--white);
     border-radius: 15px;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
-
-.input-section{
-    background-color: var(--white);
+.input-section{ 
+    margin-top: -1rem;
 }
 .output-section {
     background-color: var(--very-dark-cyan);
     color: var(--white);
+    margin: 1.6rem;
+    border-radius: 15px;
 }
 .input-section, .output-section{
- padding: 2rem;
- flex: 1;
+    padding: 2rem;
+    flex: 1;
+}
+.output-value{
+   color: var(--strong-cyan);
+   font-size: 46px;
+}
+ .tip-options{
+    display: grid;
+    grid-template-columns:  repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;  
+    border-radius: 5px;
+    transition: all 300ms ease-in-out;
+}
+.customTip{
+    padding: 0.5rem 1rem;
+    font-size: 1.6rem;
+}
+.reset-button {
+    background-color: var(--strong-cyan);
+    color: var(--very-dark-cyan);
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 2rem;
+}
+.reset-button:disabled{
+    background-color: var(--dark-grayish-cyan);
+    cursor: not-allowed;
+}
+@media (max-width: 768px){
+   .container{
+    flex-direction: column;
+   }
 }
 </style>
