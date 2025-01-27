@@ -28,16 +28,20 @@
 
 <style scoped>
 .logo {
-  height: 6em;
+  height: 7em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
+  cursor: pointer;
+  margin-top: 15px;
+  margin-bottom: -20px;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em hsl(191, 94%, 14%));
+  filter: drop-shadow(0 0 2em var(--light-grayish-cyan));
 }
 .attribution {
   margin: 10px auto;
   color: var(--very-dark-cyan)
-}</style>
+}
+</style>
  

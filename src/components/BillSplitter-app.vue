@@ -1,33 +1,6 @@
-<template>
-   <div class="container">
-        <div class="input-section">
-                <label for="bill">Bill</label>
-                <input id="bill" v-model.number="bill" placeholder="0.00">
-
-                <label>Select Tip %</label>
-                <div class="tip-options">
-                    <button v-for="tip in tipOptions" :key="tip" @click="selectTip(tip)"
-                        :class="{ active: selectedTip === tip }">{{ tip }}%
-                    </button>
-                    <input id="customTipValue" v-model.number="customTipValue"
-                        @input="onCustomTipInput" placeholder="Custom" />
-                </div>
-                <label for="people" id="people">Number of People</label>
-                <input id="people" v-model.number="people" placeholder="0">
-        </div>
-        <div class="output-section">
-            <p>Tip Amount / person</p>
-            <div class="output-value">${{ formattedTipAmountPerPerson }}</div>
-
-            <p>Total / person</p>
-            <div class="output-value">${{ formattedTotalPerPerson }}</div>
-
-            <button class="reset-button" :disabled="!canReset" @click="reset">RESET</button>
-            </div>
-    </div>
-</template>
-
 <script>
+import { errorMessages } from 'vue/compiler-sfc';
+
 export default {
     data() {
         return {
@@ -98,90 +71,275 @@ export default {
                 return this.totalPerPerson;
             }
         },
-        canReset(){
+        canReset() {
             // Ternary operator
-             return this.bill || this.people || this.selectedTip || this.customTipValue;
+            return this.bill || this.people || this.selectedTip || this.isCustomTipActive;
 
-             //same as above code 
-            // if (this.bill || this.people || this.selectedTip || this.customTipValue){
+            //same as above code
+            // if (this.bill || this.people || this.selectedTip || this.isCustomTipActive){
             //   return true;
             // } else {
             //   return false;
             // }
         },
+
     },
     methods: {
         selectTip(tip) {
             this.selectedTip = tip;
             // this.customTipValue = null; // Clear customTipValue when a standard tip is selected
-            
+
             this.isCustomTipActive = false;
         },
-        onCustomTipInput(){
-          this.isCustomTipActive = true;
+        onCustomTipInput() {
+            this.isCustomTipActive = true;
         },
         reset() {
             this.bill = null;
             this.selectedTip = null;
             this.customTipValue = null;
             this.people = null;
-            this.isCustomTipActive = false; 
+            this.isCustomTipActive = false;
         }
     }
 }
 </script>
 
+<template>
+    <div class="container">
+        <div class="input-section">
+                <label for="bill">Bill</label>
+                <input id="bill" v-model.number="bill" placeholder="0.00">
+                <img class="icon" src="/src/assets/images/icon-dollar.svg" alt="Dollar Icon" />
+                <span v-if="bill === 0" class="error-message">Can't be zero</span>
+                <span v-else-if="bill < 0" class="error-message">Can't be negative</span>
+
+                <label>Select Tip %</label>
+                <div class="tip-options">
+                    <button v-for="tip in tipOptions" :key="tip" @click="selectTip(tip)"
+                        :class="{ active: selectedTip === tip }">{{ tip }}%
+                    </button>
+                    <input id="customTipValue" v-model.number="customTipValue" @input="onCustomTipInput"
+                        placeholder="Custom" />
+                </div>
+            <label for="people">Number of People</label>
+            <input id="people" v-model.number="people" placeholder="1">
+            <img class="icon" src="/src/assets/images/icon-person.svg" alt="Person Icon" />
+            <span v-if="people === 0" class="error-message">Can't be zero</span>
+            <span v-else-if="people < 0" class="error-message"> Can't be negative</span>
+
+        </div>
+        <div class="output-section">
+            <div class="output-group">
+                <p>Tip Amount</p>
+                <p class="label-person">/ person</p>
+                <span class="output-value">${{ formattedTipAmountPerPerson }}</span>
+                <p class="label-total">Total</p>
+                <p class="label-person"> / person</p>
+                <span class="output-value">${{ formattedTotalPerPerson }}</span>
+                <button class="reset-button" :disabled="!canReset" @click="reset">RESET</button>
+            </div>
+        </div>
+    </div>
+</template>
+
 <style scoped>
-.container{
+.container {
     display: flex;
+    margin-top: 50px;
+    justify-content: space-between;
     background-color: var(--white);
     border-radius: 15px;
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    max-width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+    place-items: center;
 }
-.input-section{ 
-    margin-top: -1rem;
+.input-section {
+    margin-top: 0.2rem;
+    width: 100%;
+    padding: 2rem;
 }
 .output-section {
     background-color: var(--very-dark-cyan);
     color: var(--white);
-    margin: 1.6rem;
+    margin: 1rem;
     border-radius: 15px;
+    width: 100%;
+    height: 25rem;
 }
-.input-section, .output-section{
+.input-section,
+.output-section {
     padding: 2rem;
-    flex: 1;
 }
-.output-value{
-   color: var(--strong-cyan);
-   font-size: 46px;
+.output-group {
+    display: flex;
+    flex-direction: column; 
+    padding: 0.3rem;
 }
- .tip-options{
+.tip-options {
     display: grid;
-    grid-template-columns:  repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
-    margin-top: 1rem;  
+    margin-top: 1rem;
     border-radius: 5px;
     transition: all 300ms ease-in-out;
 }
-.customTip{
-    padding: 0.5rem 1rem;
-    font-size: 1.6rem;
+.label-total{
+    margin-top: 6rem;
+}
+.label-person {
+    margin-top: -1.2rem;
+    color: var(--grayish-cyan);
+} 
+.output-value {
+    color: var(--strong-cyan);
+    font-size: 46px;
+    margin-left: 100px;
+    text-align: right;
+    margin-top: -5rem;
+    padding-left: 2rem;
 }
 .reset-button {
+    display: flex;
+    flex-direction: column;
     background-color: var(--strong-cyan);
     color: var(--very-dark-cyan);
     width: 100%;
     padding: 0.5rem;
-    margin-top: 2rem;
+    margin-top: 6rem;
 }
-.reset-button:disabled{
+
+.reset-button:hover {
+    background-color: hsl(170, 82%, 49%);
+}
+
+.reset-button:disabled {
     background-color: var(--dark-grayish-cyan);
     cursor: not-allowed;
 }
-@media (max-width: 768px){
-   .container{
-    flex-direction: column;
-   }
+
+.icon{
+    display: flex;
+    margin-top: -1.3rem;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: -5.5rem;
+    padding-bottom: 5rem;
+    display: block;
+    text-align: right;
+}
+
+@media (min-width: 300px) and (max-width: 359px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        transition: all 300ms ease-in-out;
+    }
+    .input-section {
+        width: 100%;
+        height: auto;
+    }
+    .output-section {
+        width: 90%;
+        height: auto;
+        padding: 1rem;
+    }
+    .tip-options{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    input{
+      font-size: 20px;
+    }
+    p{
+        font-size: 0.80rem;
+        margin-left: -0.6rem;
+    }
+    .error-message{
+        position: relative;
+        font-size: 15px;
+        top: 5rem;
+    }
+    .label-person{
+      margin-top: -10px;
+    }
+    .output-value{
+        font-size: 24px;
+        margin: 1px;
+        margin-top: -3.2rem;
+    }
+}
+@media (min-width: 360px) and (max-width: 599px){
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        transition: all 300ms ease-in-out;
+    }
+    .input-section {
+        width: 100%;
+        height: auto;
+    }
+    .output-section {
+        width: 90%;
+        height: auto;
+        padding: 1rem;
+    }
+    .tip-options {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    p {
+        font-size: 0.80rem;
+        margin-left: -0.6rem;
+    }
+    .error-message {
+        position: relative;
+        font-size: 15px;
+        top: 5rem;
+    }
+    .label-person {
+        margin-top: -10px;
+    }
+    .output-value {
+        font-size: 30px;
+        margin: 1px;
+        margin-top: -3.2rem;
+    }
+}
+@media  (min-width: 600px) and (max-width: 849px){
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        transition: all 300ms ease-in-out;
+    }
+    .input-section {
+        width: 100%;
+        height: auto;
+    }
+    .output-section {
+        width: 90%;
+        height: auto;
+        padding: 1rem;
+    }
+    .tip-options {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .label-person {
+        margin-top: -10px;
+    }
 }
 </style>
