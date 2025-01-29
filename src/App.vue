@@ -22,7 +22,7 @@
 
   <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io/challenges" target="_blank">Frontend Mentor</a>.
-    Coded by <a href="#">Cornelio</a>.
+    Coded by <a href="https://github.com/Timex29">Cornelio</a>.
   </div>
 </template>
 
