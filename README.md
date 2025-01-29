@@ -38,7 +38,7 @@ Users should be able to:
 - Solution URL: [github.com](https://github.com/Timex29/tip-calculator-app)
   
 ### Live view 
-- Live Site URL: You can view this project to see it [Tip calculator app](https://timex29.github.io/tip-calculator-app/)
+- Live Site URL: [Tip calculator app](https://timex29.github.io/tip-calculator-app/)
   
 
 ## Description
