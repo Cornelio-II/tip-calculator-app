@@ -16,12 +16,12 @@
 </script>
 
 <template>
-    <img :src="logo" alt="billSplitterlogo.svg" class="logo">
-    
-    <BillSplitterApp />
+  <img :src="logo" alt="billSplitterlogo.svg" class="logo">
+
+  <BillSplitterApp />
 
   <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    Challenge by <a href="https://www.frontendmentor.io/challenges" target="_blank">Frontend Mentor</a>.
     Coded by <a href="#">Cornelio</a>.
   </div>
 </template>

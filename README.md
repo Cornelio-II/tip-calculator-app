@@ -9,13 +9,15 @@ This is a solution to the [Tip calculator app challenge on Frontend Mentor](http
   - [Overview](#overview)
     - [The challenge](#the-challenge)
     - [Screenshot](#screenshot)
-    - [Links](#links)
+  - [Links](#links)
+    - [Source code](#source-code)
+    - [Live view](#live-view)
   - [Description](#description)
     - [Features:](#features)
   - [My process](#my-process)
     - [Built with](#built-with)
   - [Author](#author)
-  - [Got feedback for us?](#got-feedback-for-us)
+  - [Got feedback for me?](#got-feedback-for-me)
 
 ## Overview
 
@@ -28,13 +30,15 @@ Users should be able to:
 - Calculate the correct tip and total cost of the bill per person
 
 ### Screenshot
-
 ![](./public/design/active-states.jpg)
 
-### Links
+## Links
 
+### Source code
 - Solution URL: [github.com](https://github.com/Timex29/tip-calculator-app)
-- Live Site URL: [Tip-calculator](https://timex29.github.io/tip-calculator-app/)
+  
+### Live view 
+- Live Site URL: You can view this project to see it [Tip calculator app](https://timex29.github.io/tip-calculator-app/)
   
 
 ## Description
@@ -67,7 +71,8 @@ This app is perfect for anyone looking to save time and avoid the confusion of m
 - Frontend Mentor - [@Timex29](https://www.frontendmentor.io/profile/Timex29)
 - x - [@LlagasCornelio](https://x.com/LlagasCornelio)
 
-## Got feedback for us?
+
+## Got feedback for me?
 
 I’d love to hear your thoughts and suggestions about this project! Whether it’s a bug you’ve found, a feature you’d like to see, or just general feedback, your input is highly valuable to me.
 
