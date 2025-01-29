@@ -70,6 +70,7 @@ This app is perfect for anyone looking to save time and avoid the confusion of m
 
 - Frontend Mentor - [@Timex29](https://www.frontendmentor.io/profile/Timex29)
 - x - [@LlagasCornelio](https://x.com/LlagasCornelio)
+- bsky.app- [@cornelio30.bsky.social](https://bsky.app/profile/cornelio30.bsky.social)
 
 
 ## Got feedback for me?
