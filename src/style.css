@@ -2,11 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 :root {
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  
+ -webkit-font-smoothing: antialiased;
+ -moz-osx-font-smoothing: grayscale;
+ -moz-text-size-adjust: none;
+ -webkit-text-size-adjust: none;
+
   --strong-cyan: hsl(172, 67%, 45%);
   --very-dark-cyan: hsl(183, 100%, 15%);
   --dark-grayish-cyan: hsl(186, 14%, 43%);
@@ -17,33 +17,56 @@
 
  
 }
+#app{
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: 0 1rem;
+  text-align: center;
+  align-content: center;
+  place-items: center;
+  align-items: flex-start;
+}
 
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
   list-style-type: none;
   font-family: "Space Mono", monospace;
   font-weight: 700;
-  cursor: pointer;
+  box-sizing: inherit;
+  transform: scale(1);
+  transform-origin: 0 0;
+}
+
+*{
+  margin: 0;
+  
 }
 a {
   color: #646cff;
-  text-decoration: inherit;
+  text-decoration: none;
 }
 a:hover {
-  color: inherit;
+  color: var(--very-dark-cyan);
 }
-
+html:focus-within {
+    scroll-behavior: smooth;
+}
+html{
+  box-sizing: border-box;
+}
+html,
+body{
+  max-width: 100wv;
+}
 body {
-  margin: 0;
   min-height: 100vh;
-  background-color: var(--light-grayish-cyan); 
-  text-align: center;
-  align-content: center;
-  place-items: center;
+  line-height: 1.5;
+  background-color: var(--light-grayish-cyan);
+  font-synthesis: none;
+  text-rendering: optimizeSpeed;
+  text-size-adjust: none; 
 }
-
 button {
   background-color: var(--very-dark-cyan);
   color: var(--white);
@@ -52,6 +75,7 @@ button {
   border-radius: 10px;
   font-size: 1.6rem;
   place-items: center;
+  cursor: pointer;
 }
 button.active {
   background-color: var(--strong-cyan);
@@ -83,6 +107,7 @@ input {
   color: var(--very-dark-cyan);
   transition: all 300ms ease-in-out;
   padding-right: 20px;
+  cursor: pointer;
 }
 input:hover, 
 input:active,
@@ -93,6 +118,27 @@ input:focus {
   border-color: var(--strong-cyan);
 } 
 input::placeholder {
-  color: var(--dark-grayish-cyan);    
+  color: var(--dark-grayish-cyan);   
 }
-
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+/* Improve line wrapping */
+p,
+input,
+span {
+  text-wrap: pretty;
+}
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+  scroll-margin-block: 5ex;
+}
+/*
+  Create a root stacking context
+*/
+#root, #__next {
+  isolation: isolate;
+}
