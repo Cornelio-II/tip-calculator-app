@@ -424,4 +424,32 @@ export default {
         margin-top: -10px;
     }
 }
+@media (min-width: 850px) and (max-width: 1050px) {
+    .container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            transition: all 300ms ease-in-out;
+        }
+    
+        .input-section {
+            width: 100%;
+            height: auto;
+        }
+    
+        .output-section {
+            width: 90%;
+            height: auto;
+            padding: 1rem;
+        }
+    
+        .tip-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+    
+        .label-person {
+            margin-top: -10px;
+        }
+}
 </style>

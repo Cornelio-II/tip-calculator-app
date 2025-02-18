@@ -17,8 +17,10 @@
 
 <template>
   <img :src="logo" alt="billSplitterlogo.svg" class="logo">
+  
+    <BillSplitterApp />
+ 
 
-  <BillSplitterApp />
 
   <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io/challenges" target="_blank">Frontend Mentor</a>.
@@ -35,6 +37,7 @@
   cursor: pointer;
   margin-top: 15px;
   margin-bottom: -20px;
+  margin-inline: auto;
 }
 .logo:hover {
   filter: drop-shadow(0 0 2em var(--light-grayish-cyan));
@@ -43,5 +46,6 @@
   margin: 10px auto;
   color: var(--very-dark-cyan)
 }
+
 </style>
  
