@@ -10,58 +10,53 @@
   --very-light-graysh-cyan: hsl(189, 41%, 97%);
   --white: hsl(0, 0%, 100%);
 
- 
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
 }
 #app{
-  max-width: 1440px;
+  max-width: 90rem;
   padding: 2rem;
   text-align: center;
   place-items: center;
   align-items: flex-start;
   margin-left: auto;
   margin-right: auto;
+
 }
 *,
 *::before,
 *::after {
   list-style-type: none;
   font-family: "Space Mono", monospace;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   box-sizing: inherit;
   transform: scale(1);
   transform-origin: 0 0;
 }
-*{
-  margin: 0;
-  padding: 0;
-}
-a {
-  color: #646cff;
-  text-decoration: none;
-}
-a:hover {
-  color: var(--very-dark-cyan);
-}
+
 html:focus-within {
     scroll-behavior: smooth;
 }
 
-html{
+body, html{
   box-sizing: border-box;
  -webkit-font-smoothing: antialiased;
  -moz-osx-font-smoothing: grayscale;
  -moz-text-size-adjust: none;
  -webkit-text-size-adjust: none;
+ font-synthesis: none;
+ text-rendering: optimizeSpeed;
+ text-size-adjust: none; 
+ margin: 0;
+ padding: 0;
 }
 
 body {
   min-height: 100vh;
   min-height: 100dvh;
   line-height: 1.5;
+  font-weight: var(--font-weight-regular);
   background-color: var(--light-grayish-cyan);
-  font-synthesis: none;
-  text-rendering: optimizeSpeed;
-  text-size-adjust: none; 
 }
 button {
   background-color: var(--very-dark-cyan);
@@ -85,11 +80,7 @@ label {
   display: flex;
   margin-top: 1rem;
 }
-p{
-  font-size: 20px;
-  margin: 0.5rem 0;
-  text-align: left;
-}
+
 input {
   width: 100%;
   height: 55px;
@@ -118,9 +109,15 @@ input::placeholder {
 }
 /* Make images easier to work with */
 img,
-picture {
-  max-width: 100%;
-  display: block;
+picture,
+video,
+iframe {
+  max-inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 2/1;
+  object-fit: cover;
+  object-position: top center;
+  zoom: 1;
 }
 /* Improve line wrapping */
 p,
@@ -128,13 +125,21 @@ input,
 span {
   text-wrap: pretty;
 }
-/* Anything that has been anchored to should have extra scroll margin */
-:target {
-  scroll-margin-block: 5ex;
+footer{
+  font-size: clamp(0.88rem, 0.83rem + 0.19vw, 1rem);
+  color: var(--dark-grayish-cyan);
+  font-weight: var(--font-weight-bold);
 }
-/*
-  Create a root stacking context
-*/
-#root, #__next {
-  isolation: isolate;
+footer a {
+  color: hsl(228, 45%, 44%);
+  text-decoration: none;
+}
+@media (hover: hover) {
+  a:hover {
+    transition: color 0.3s;
+    text-decoration: underline;
+    color: var(--very-dark-cyan);
+  }
+
+
 }
