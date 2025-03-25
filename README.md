@@ -35,10 +35,10 @@ Users should be able to:
 ## Links
 
 ### Source code
-- Solution URL: [github.com](https://github.com/Timex29/tip-calculator-app)
+- Solution URL: [github.com](https://github.com/Cornelio-II/tip-calculator-app)
   
 ### Live view 
-- Live Site URL: [Tip calculator app](https://timex29.github.io/tip-calculator-app/)
+- Live Site URL: [Tip calculator app](https://Cornelio-II.github.io/tip-calculator-app/)
   
 
 ## Description

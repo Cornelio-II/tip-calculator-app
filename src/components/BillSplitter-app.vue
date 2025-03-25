@@ -194,7 +194,7 @@ export default {
             <a href="https://www.frontendmentor.io/challenges" target="_blank"
               >Frontend Mentor</a
             >. Coded by
-            <a href="https://github.com/Timex29" target="_blank">Cornelio</a>.
+            <a href="https://github.com/Cornelio-II/tip-calculator-app" target="_blank">Cornelio</a>.
           </p>
       </footer>
     </article>
